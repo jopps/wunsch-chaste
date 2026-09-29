@@ -16,7 +16,7 @@ async function api(path, method = 'GET', body, key) {
     headers: { 'Content-Type': 'application/json', ...(key ? { 'x-admin-key': key } : {}) },
     body: body ? JSON.stringify(body) : undefined,
   });
-  return { ok: r.ok, status: r.status, data: await r.json().catch(() => ({})) };
+  return { ok: r.ok, status: r.status, data: await r.json().catch(() => ({ error: `Fehler ${r.status}` })) };
 }
 const evEmoji = e => e === 'Geburtstag' ? '🎂' : e === 'Weihnachten' ? '🎄' : '🎉';
 
