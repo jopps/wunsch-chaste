@@ -1,6 +1,5 @@
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-$('#logo').innerHTML = [...'Wunsch-Chaste'].map(c => `<span>${c}</span>`).join('');
 
 const EMOJI = ['🧸','🚀','🎨','📚','🦄','⚽','🎲','🧩','🚂','🎸'];
 const OTHER = 'Anderer …';
@@ -127,7 +126,7 @@ async function showAdmin(id, key) {
       <div class="err" id="err" style="${msg ? 'color:#1a9c62' : ''}">${msg || ''}</div>
       <button class="btn big" id="save">Speichern 💾</button>
     </div>
-    <p class="center"><a href="/w/${id}" style="color:var(--purple);font-weight:600">Gästeansicht öffnen →</a></p>`;
+    <p class="center"><a href="/w/${id}" class="link">Gästeansicht öffnen →</a></p>`;
 
     const getEvent = eventPicker($('#ev'), d.event);
     const status = Object.fromEntries(list.gifts.map(g => [g.id, g.takenBy]));
@@ -176,12 +175,12 @@ function renderGuest(list) {
     ${list.gifts.map((g, i) => `
       <div class="gift ${g.takenBy ? 'taken' : ''}">
         <span class="emo">${g.takenBy ? '✅' : EMOJI[i % EMOJI.length]}</span>
-        <span class="t">${esc(g.title)}${g.takenBy ? `<span class="who">Geschenkt von ${esc(g.takenBy)}</span>` : ''}</span>
+        <span class="t"><b>${esc(g.title)}</b>${g.takenBy ? `<span class="who">Geschenkt von ${esc(g.takenBy)}</span>` : ''}</span>
         ${g.takenBy ? (t[g.id] ? `<button class="btn ghost small" data-undo="${g.id}">Zurücknehmen</button>` : '')
                     : `<button class="btn mint small" data-id="${g.id}">Schenken</button>`}
       </div>`).join('')}
   </div>
-  <p class="center"><a href="/" style="color:var(--purple);font-weight:600">Eigene Wunschliste erstellen</a></p>`;
+  <p class="center"><a href="/" class="link">Eigene Wunschliste erstellen</a></p>`;
 }
 
 app.addEventListener('click', async e => {
