@@ -1,7 +1,6 @@
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-const EMOJI = ['🧸','🚀','🎨','📚','🦄','⚽','🎲','🧩','🚂','🎸'];
 const OTHER = 'Anderer …';
 const app = $('#app');
 
@@ -172,9 +171,9 @@ function renderGuest(list) {
     <p class="title">Wunschliste von ${esc(list.child)}</p>
     <span class="badge">${evEmoji(list.event)} ${esc(list.event)}</span>
     <p style="opacity:.7;margin:12px 0 0">${left ? `Noch ${left} von ${list.gifts.length} Geschenken frei` : 'Alle Geschenke sind vergeben! 🎊'}</p>
-    ${list.gifts.map((g, i) => `
+    ${list.gifts.map(g => `
       <div class="gift ${g.takenBy ? 'taken' : ''}">
-        <span class="emo">${g.takenBy ? '✅' : EMOJI[i % EMOJI.length]}</span>
+        <span class="emo">${g.takenBy ? '✅' : '🎁'}</span>
         <span class="t"><b>${esc(g.title)}</b>${g.takenBy ? `<span class="who">Geschenkt von ${esc(g.takenBy)}</span>` : ''}</span>
         ${g.takenBy ? (t[g.id] ? `<button class="btn ghost small" data-undo="${g.id}">Zurücknehmen</button>` : '')
                     : `<button class="btn mint small" data-id="${g.id}">Schenken</button>`}
