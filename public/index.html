@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wunsch-Chaste 🎁</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Chewy&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink:#ff5fa2; --yellow:#ffd23f; --mint:#3ddc97; --blue:#4cc9f0; --purple:#8b5cf6; --orange:#ff9f43;
+    --ink:#2b2350; --card:#fff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin:0; min-height:100vh; color:var(--ink);
+    font-family:'Fredoka','Nunito','Trebuchet MS',system-ui,sans-serif; font-size:17px;
+    background:
+      radial-gradient(circle at 10% 10%, #ffe1f0 0 18%, transparent 19%),
+      radial-gradient(circle at 92% 20%, #d7f7ff 0 16%, transparent 17%),
+      radial-gradient(circle at 80% 90%, #fff3c4 0 20%, transparent 21%),
+      radial-gradient(circle at 5% 85%, #d9fbe8 0 15%, transparent 16%),
+      #fff9fd;
+    background-attachment: fixed;
+  }
+  .wrap { max-width:640px; margin:0 auto; padding:20px 16px 60px; }
+  header { text-align:center; padding:18px 0 8px; }
+  header a { text-decoration:none; }
+  h1 { margin:0; font-family:'Chewy','Fredoka',cursive; font-weight:400; font-size:clamp(2.6rem,13vw,4.2rem); letter-spacing:1px; line-height:1.1; }
+  h1 span {
+    display:inline-block; -webkit-text-stroke:2px var(--ink); paint-order:stroke fill;
+    text-shadow:3px 3px 0 var(--ink);
+  }
+  h1 span:nth-child(odd) { transform:rotate(-6deg); }
+  h1 span:nth-child(even) { transform:rotate(5deg); }
+  h1 span:nth-child(3n) { transform:rotate(-2deg) scale(1.1); }
+  h1 span:nth-child(6n+1){color:var(--pink)} h1 span:nth-child(6n+2){color:var(--orange)}
+  h1 span:nth-child(6n+3){color:var(--yellow)} h1 span:nth-child(6n+4){color:var(--mint)}
+  h1 span:nth-child(6n+5){color:var(--blue)} h1 span:nth-child(6n){color:var(--purple)}
+  .sub { margin:4px 0 0; opacity:.7; }
+  .card {
+    background:var(--card); border-radius:26px; padding:22px; margin-top:18px;
+    border:3px solid var(--ink); box-shadow:6px 6px 0 var(--purple);
+  }
+  .card.alt { box-shadow:6px 6px 0 var(--mint); }
+  label { display:block; font-weight:600; margin:14px 0 6px; }
+  input[type=text] {
+    width:100%; padding:12px 14px; font:inherit; color:var(--ink);
+    border:3px solid var(--ink); border-radius:16px; background:#fffdf5; outline:none;
+  }
+  input[type=text]:focus { border-color:var(--pink); box-shadow:0 0 0 4px #ffd0e5; }
+  .chips { display:flex; flex-wrap:wrap; gap:10px; }
+  .chip {
+    padding:10px 16px; border:3px solid var(--ink); border-radius:999px; background:#fff;
+    font:inherit; font-weight:600; color:var(--ink); cursor:pointer; transition:transform .1s;
+  }
+  .chip:hover { transform:translateY(-2px) rotate(-2deg); }
+  .chip.on { background:var(--yellow); box-shadow:3px 3px 0 var(--ink); }
+  .gift-row { display:flex; gap:8px; margin-bottom:10px; }
+  .gift-row input { flex:1; }
+  .btn {
+    font:inherit; font-weight:700; color:#fff; background:var(--pink); cursor:pointer;
+    border:3px solid var(--ink); border-radius:18px; padding:12px 20px; box-shadow:4px 4px 0 var(--ink);
+    transition:transform .1s, box-shadow .1s;
+  }
+  .btn:hover { transform:translate(-1px,-1px); box-shadow:5px 5px 0 var(--ink); }
+  .btn:active { transform:translate(3px,3px); box-shadow:1px 1px 0 var(--ink); }
+  .btn.mint { background:var(--mint); color:var(--ink); }
+  .btn.blue { background:var(--blue); color:var(--ink); }
+  .btn.ghost { background:#fff; color:var(--ink); }
+  .btn.small { padding:8px 14px; box-shadow:3px 3px 0 var(--ink); }
+  .btn.big { width:100%; font-size:1.15rem; margin-top:22px; }
+  .x { flex:none; width:48px; padding:0; background:#fff; color:var(--ink); }
+  .err { color:#d6245b; font-weight:600; margin-top:12px; min-height:1em; }
+  .title { font-size:1.6rem; font-weight:700; margin:0; }
+  .badge {
+    display:inline-block; background:var(--orange); color:var(--ink); font-weight:700;
+    border:3px solid var(--ink); border-radius:999px; padding:4px 14px; margin-top:8px;
+  }
+  .gift {
+    display:flex; align-items:center; gap:12px; padding:14px; margin-top:12px;
+    border:3px solid var(--ink); border-radius:20px; background:#f3fbff;
+  }
+  .gift:nth-child(4n+1){background:#fff0f7} .gift:nth-child(4n+2){background:#f0fff8}
+  .gift:nth-child(4n+3){background:#fff9dd} .gift:nth-child(4n){background:#f3f0ff}
+  .gift .emo { font-size:1.9rem; }
+  .gift .t { flex:1; font-weight:600; word-break:break-word; }
+  .gift.taken { opacity:.75; }
+  .gift.taken .t { text-decoration:line-through; text-decoration-thickness:2px; }
+  .who { display:block; font-size:.85rem; font-weight:500; text-decoration:none; opacity:.9; }
+  .share { display:flex; gap:8px; margin-top:12px; }
+  .share input { flex:1; font-size:.9rem; }
+  dialog {
+    border:3px solid var(--ink); border-radius:26px; padding:24px; max-width:92vw; width:400px;
+    box-shadow:8px 8px 0 var(--pink); color:var(--ink); font-family:inherit;
+  }
+  dialog::backdrop { background:rgba(43,35,80,.45); }
+  .row { display:flex; gap:10px; margin-top:16px; }
+  .row .btn { flex:1; }
+  .center { text-align:center; }
+  .hidden { display:none; }
+  .warn { background:#fff3c4; border:3px dashed var(--ink); border-radius:16px; padding:10px 14px; margin-top:12px; font-size:.9rem; }
+  .lock { flex:none; font-size:.85rem; font-weight:600; background:#fff; border:2px solid var(--ink); border-radius:999px; padding:4px 10px; }
+  .mine a { display:block; margin-top:8px; font-weight:600; color:var(--purple); }
+  .confetti { position:fixed; top:-20px; font-size:26px; pointer-events:none; animation:fall 2.2s ease-in forwards; z-index:99; }
+  @keyframes fall { to { transform:translateY(105vh) rotate(540deg); opacity:.9; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a href="/"><h1 id="logo" aria-label="Wunsch-Chaste"></h1></a>
+    <p class="sub">Wünsche sammeln, Geschenke teilen 🎈</p>
+  </header>
+  <main id="app"></main>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog" id="dlgForm">
+    <h2 class="title" style="font-size:1.3rem">Das schenke ich! 🎁</h2>
+    <p id="dlgGift" style="font-weight:600"></p>
+    <label for="dlgName">Dein Name</label>
+    <input type="text" id="dlgName" maxlength="40" placeholder="z.B. Tante Sabine" autocomplete="name">
+    <div class="err" id="dlgErr"></div>
+    <div class="row">
+      <button type="button" class="btn ghost" id="dlgCancel">Abbrechen</button>
+      <button type="submit" class="btn mint">Reservieren</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="/app.js"></script>
+</body>
+</html>
